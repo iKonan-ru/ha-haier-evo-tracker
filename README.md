@@ -43,12 +43,12 @@ npm run fix          # prettier + eslint --fix
 
 ## Стек
 
-| | |
-|---|---|
-| Vite 7 + React 19 + TypeScript | сборка и UI |
-| Mantine 7 | компоненты, тема, хуки |
-| Zustand 5 | глобальный стейт |
-| ESLint 9 + Prettier 3 | линт и формат |
+|                                |                        |
+| ------------------------------ | ---------------------- |
+| Vite 7 + React 19 + TypeScript | сборка и UI            |
+| Mantine 7                      | компоненты, тема, хуки |
+| Zustand 5                      | глобальный стейт       |
+| ESLint 9 + Prettier 3          | линт и формат          |
 
 Архитектура — FSD (Feature-Sliced Design): `app → pages → widgets → features → entities → shared`.
 
