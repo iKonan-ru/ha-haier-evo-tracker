@@ -1,6 +1,7 @@
 import {
   formatValue,
   normalizeAttributes,
+  UNKNOWN_ATTR_NAME,
   type IChangelogEntry,
 } from '@entities/attribute';
 import { fetchHaierEvo } from '@shared/api';
@@ -41,10 +42,12 @@ export const poll = async ({
 }: IPollParams): Promise<PollResult> => {
   const data = await fetchHaierEvo(apiHost, signal);
 
-  const availableDevices = data.devices.map((d) => d.device_name);
+  const availableDevices = data.devices.map((device) => device.device_name);
 
   const device = selectedDeviceName
-    ? (data.devices.find((d) => d.device_name === selectedDeviceName) ?? null)
+    ? (data.devices.find(
+        (device) => device.device_name === selectedDeviceName,
+      ) ?? null)
     : (data.devices[0] ?? null);
 
   if (!device) {
@@ -52,7 +55,7 @@ export const poll = async ({
   }
 
   const attributes = normalizeAttributes(device);
-  const backendStatus = device.backend_data?.status ?? '—';
+  const backendStatus = device.backend_data?.status ?? '-';
   const { changedKeys, changes, snapshot } = diffAttributes(
     previousSnapshot,
     attributes,
@@ -61,8 +64,10 @@ export const poll = async ({
   const now = new Date().toISOString();
   const newChangelogEntries: IChangelogEntry[] = changes.map(
     ({ codeKey, oldVal, newVal }) => {
-      const attr = attributes.find((a) => a.codeKey === codeKey);
-      const name = attr?.name ?? 'unknown';
+      const attr = attributes.find(
+        (attribute) => attribute.codeKey === codeKey,
+      );
+      const name = attr?.name ?? UNKNOWN_ATTR_NAME;
       const newLabel = attr
         ? formatValue({
             ...attr,

@@ -1,6 +1,6 @@
 import type { IAttribute } from '../types';
+import { UNKNOWN_ATTR_NAME } from './constants';
 
-const UNKNOWN = 'unknown';
 const NOT_FOUND = 'not found';
 
 export const resolveListLabel = (attr: IAttribute): string | null => {
@@ -25,7 +25,7 @@ export const resolveListLabel = (attr: IAttribute): string | null => {
       ? item.description
       : item.name;
 
-  const isUsable = label && label !== UNKNOWN && label !== NOT_FOUND;
+  const isUsable = label && label !== UNKNOWN_ATTR_NAME && label !== NOT_FOUND;
 
   return isUsable ? label : String(item.value);
 };

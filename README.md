@@ -1,6 +1,6 @@
-# Haier Tracker
+# Haier Evo Attributes Tracker for HA
 
-Трекер изменений атрибутов стиральной машины Haier через API кастомной интеграции [haier_evo](https://github.com/Kononenko-Daniil/haier_evo) для Home Assistant.
+Трекер изменений атрибутов устройств Haier через API кастомной интеграции [haier_evo](https://github.com/Kononenko-Daniil/haier_evo) для Home Assistant.
 
 ## Что делает
 
@@ -15,7 +15,7 @@
 
 ```bash
 npm install
-npm run dev        # http://localhost:5173
+npm run dev # http://localhost:5173
 ```
 
 По умолчанию запросы проксируются на `http://homeassistant.local:8123`. Переопределить:
@@ -24,21 +24,27 @@ npm run dev        # http://localhost:5173
 VITE_HA_URL=http://192.168.1.100:8123 npm run dev
 ```
 
-Хост также можно сменить прямо в интерфейсе без перезапуска — поле «Хост Home Assistant» + кнопка «Применить».
+Хост также можно сменить прямо в интерфейсе без перезапуска - поле «Хост Home Assistant» + кнопка «Применить».
+
+## Подключение к Home Assistant
+
+Для подключения к локальному HA (например, `http://192.168.1.100:8123`) используй локальный запуск - Vite-прокси перехватывает запросы и пересылает на HA, обходя ограничения CORS и mixed content.
+
+> **В задеплоенной версии локальный HTTP-адрес не работает** - браузер блокирует HTTP-запросы со страниц, загруженных по HTTPS.
 
 ## Сборка
 
 ```bash
-npm run build        # fix + tsc + vite build → dist/
-npm run build:no-lint  # без линтера
-npm run preview      # превью production-сборки (прокси на HA не работает)
+npm run build           # fix + tsc + vite build → dist/
+npm run build:no-lint   # без линтера
+npm run preview         # превью production-сборки
 ```
 
 ## Команды разработчика
 
 ```bash
-npm run lint         # ESLint
-npm run fix          # prettier + eslint --fix
+npm run lint            # ESLint
+npm run fix             # prettier + eslint --fix
 ```
 
 ## Стек
@@ -50,12 +56,14 @@ npm run fix          # prettier + eslint --fix
 | Zustand 5                      | глобальный стейт       |
 | ESLint 9 + Prettier 3          | линт и формат          |
 
-Архитектура — FSD (Feature-Sliced Design): `app → pages → widgets → features → entities → shared`.
+Архитектура - FSD (Feature-Sliced Design): `app → pages → widgets → features → entities → shared`.
 
 ## Использование
 
 1. Запустить `npm run dev`
-2. При необходимости сменить хост HA в поле «Хост Home Assistant» и нажать «Применить»
-3. Выбрать устройство из выпадающего списка — поллинг запустится автоматически
-4. Кнопка «Пауза / Старт» управляет опросом вручную
-5. Интервал опроса: 500 мс — 10 с
+2. При необходимости сменить хост HA в поле "Хост Home Assistant"
+3. Выбрать устройство из выпадающего списка - поллинг запустится автоматически
+4. Кнопка "Пауза / Старт" управляет опросом вручную
+5. Интервал опроса: 500 мс - 10 с
+
+<img width="3840" height="2005" alt="ui-screenshot" src="https://github.com/user-attachments/assets/c6df490c-0ed4-44b1-8526-9290c27e0543" />

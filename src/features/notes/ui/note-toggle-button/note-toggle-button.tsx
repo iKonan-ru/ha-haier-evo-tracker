@@ -1,5 +1,5 @@
 import { type FC } from 'react';
-import { Button } from '@mantine/core';
+import { Button, Collapse } from '@mantine/core';
 import { useNotesStore } from '../../store';
 
 interface INoteToggleButtonProps {
@@ -14,13 +14,21 @@ export const NoteToggleButton: FC<INoteToggleButtonProps> = ({ codeKey }) => {
     setExpandedNoteKey(expandedNoteKey === codeKey ? null : codeKey);
   };
 
+  const isOpen = expandedNoteKey !== codeKey;
+
   return (
-    <Button
-      variant="default"
-      size="xs"
-      onClick={handleClick}
+    <Collapse
+      mt="auto"
+      in={isOpen}
     >
-      Заметка
-    </Button>
+      <Button
+        variant="default"
+        size="xs"
+        onClick={handleClick}
+        w="100%"
+      >
+        Заметка
+      </Button>
+    </Collapse>
   );
 };

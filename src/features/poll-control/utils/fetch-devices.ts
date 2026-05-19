@@ -6,5 +6,5 @@ export const fetchDevices = async (
 ): Promise<string[]> => {
   const data = await fetchHaierEvo(apiHost, signal);
 
-  return data.devices.map((d) => d.device_name);
+  return data.devices.map((device) => device.device_name);
 };

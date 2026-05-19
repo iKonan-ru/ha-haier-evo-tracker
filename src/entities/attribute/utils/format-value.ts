@@ -1,7 +1,7 @@
 import type { IAttribute } from '../types';
 import { resolveListLabel } from './resolve-list-label';
 
-const EMPTY = '—';
+const EMPTY = '-';
 
 export const formatValue = (attr: IAttribute): string => {
   if (attr.current == null) {

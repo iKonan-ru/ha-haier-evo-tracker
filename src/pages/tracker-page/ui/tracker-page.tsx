@@ -50,7 +50,7 @@ export const TrackerPage: FC = () => (
         shadow="sm"
         p="md"
         m="md"
-        w={320}
+        w={300}
         style={{ flexShrink: 0, overflowY: 'auto' }}
       >
         <ChangelogSidebar />

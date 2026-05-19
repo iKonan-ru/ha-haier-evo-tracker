@@ -42,7 +42,7 @@ export const NoteForm: FC<INoteFormProps> = ({ attr }) => {
     <Collapse in={isOpen}>
       <Textarea
         ref={textareaRef}
-        placeholder="Что вы сделали в приложении Haier…"
+        placeholder="Опишите действие, которое привело к изменению значения"
         minRows={2}
         mt="xs"
       />

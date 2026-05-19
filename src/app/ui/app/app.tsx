@@ -1,14 +1,9 @@
 import { useEffect, type FC } from 'react';
 import { TrackerPage } from '@pages/tracker-page';
-import {
-  useDeviceFetch,
-  usePollLoop,
-  useTrackerStore,
-} from '@features/poll-control';
+import { usePollLoop, useTrackerStore } from '@features/poll-control';
 import { checkIsFileProtocol } from '@shared/lib/cors';
 
 const AppContent: FC = () => {
-  useDeviceFetch();
   usePollLoop();
 
   return <TrackerPage />;
@@ -23,7 +18,7 @@ export const App: FC = () => {
     if (checkIsFileProtocol()) {
       setCorsBlocked(true);
       setRunning(false);
-      setStatus('Опрос выключен — откройте через npm run dev', true);
+      setStatus('Опрос выключен - откройте через npm run dev', true);
     }
   }, [setCorsBlocked, setRunning, setStatus]);
 

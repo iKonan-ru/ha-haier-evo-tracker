@@ -1,49 +1,15 @@
-import { useRef, useState, type ChangeEvent, type FC } from 'react';
+import { useState, type ChangeEvent, type FC } from 'react';
 import { Button, Group, TextInput } from '@mantine/core';
+import { useApplyHost } from '../../hooks';
 import { useTrackerStore } from '../../store';
-import { fetchDevices } from '../../utils';
 
 export const ApiUrlInput: FC = () => {
   const apiHost = useTrackerStore((store) => store.apiHost);
-  const setApiHost = useTrackerStore((store) => store.setApiHost);
-  const setAvailableDevices = useTrackerStore(
-    (store) => store.setAvailableDevices,
-  );
-  const setDeviceFetchError = useTrackerStore(
-    (store) => store.setDeviceFetchError,
-  );
-
   const [localHost, setLocalHost] = useState(apiHost);
-  const [isApplying, setIsApplying] = useState(false);
-  const abortRef = useRef<AbortController | null>(null);
+  const { isApplying, applyHost } = useApplyHost();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setLocalHost(event.currentTarget.value);
-  };
-
-  const handleApply = async (): Promise<void> => {
-    abortRef.current?.abort();
-    const controller = new AbortController();
-    abortRef.current = controller;
-
-    setApiHost(localHost);
-    setIsApplying(true);
-    setDeviceFetchError(null);
-
-    try {
-      const devices = await fetchDevices(localHost, controller.signal);
-      setAvailableDevices(devices);
-    } catch (err) {
-      if (err instanceof DOMException && err.name === 'AbortError') {
-        return;
-      }
-
-      setDeviceFetchError(
-        `Не удалось подключиться: ${err instanceof Error ? err.message : String(err)}`,
-      );
-    } finally {
-      setIsApplying(false);
-    }
   };
 
   return (
@@ -65,7 +31,8 @@ export const ApiUrlInput: FC = () => {
         size="xs"
         variant="default"
         loading={isApplying}
-        onClick={handleApply}
+        disabled={!localHost.trim()}
+        onClick={() => applyHost(localHost)}
       >
         Применить
       </Button>

@@ -1,7 +1,7 @@
 import { type FC, type ReactNode } from 'react';
 import { Badge, Group, Paper, Stack, Text } from '@mantine/core';
 import type { IAttribute } from '../../types';
-import { formatRange, formatValue } from '../../utils';
+import { formatRange, formatValue, UNKNOWN_ATTR_NAME } from '../../utils';
 
 interface IAttributeRowProps {
   attr: IAttribute;
@@ -10,15 +10,13 @@ interface IAttributeRowProps {
   noteContent: ReactNode;
 }
 
-const UNKNOWN = 'unknown';
-
 export const AttributeRow: FC<IAttributeRowProps> = ({
   attr,
   isChanged,
   actions,
   noteContent,
 }) => {
-  const isNamed = attr.name && attr.name !== UNKNOWN;
+  const isNamed = attr.name && attr.name !== UNKNOWN_ATTR_NAME;
   const rangeText = formatRange(attr.range);
 
   return (
@@ -32,7 +30,10 @@ export const AttributeRow: FC<IAttributeRowProps> = ({
         transition: 'background-color 300ms ease',
       }}
     >
-      <Stack gap={4}>
+      <Stack
+        gap={4}
+        h="100%"
+      >
         <Group
           gap="xs"
           align="baseline"
@@ -61,8 +62,8 @@ export const AttributeRow: FC<IAttributeRowProps> = ({
             {rangeText}
           </Text>
         )}
-        {actions}
         {noteContent}
+        {actions}
       </Stack>
     </Paper>
   );

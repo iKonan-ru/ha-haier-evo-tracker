@@ -1,5 +1,5 @@
 import { useState, type FC } from 'react';
-import { Stack, Text } from '@mantine/core';
+import { SimpleGrid, Text } from '@mantine/core';
 import { FilterToolbar, type IFilterState } from '@features/attribute-filters';
 import {
   NoteForm,
@@ -53,11 +53,14 @@ export const AttributeList: FC = () => {
           Нет атрибутов по фильтру
         </Text>
       ) : (
-        <Stack gap="xs">
+        <SimpleGrid
+          cols={{ base: 1, sm: 2, lg: 3 }}
+          spacing="xs"
+        >
           {sortedAttrs.map((attr) => {
             const isChanged = changedKeys.has(attr.codeKey);
             const notes = notesData.notes.filter(
-              (n) => n.codeKey === attr.codeKey,
+              (note) => note.codeKey === attr.codeKey,
             );
 
             return (
@@ -68,14 +71,14 @@ export const AttributeList: FC = () => {
                 actions={<NoteToggleButton codeKey={attr.codeKey} />}
                 noteContent={
                   <>
-                    <NoteForm attr={attr} />
                     <NotesList notes={notes} />
+                    <NoteForm attr={attr} />
                   </>
                 }
               />
             );
           })}
-        </Stack>
+        </SimpleGrid>
       )}
     </>
   );

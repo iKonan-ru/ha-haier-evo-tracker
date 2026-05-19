@@ -55,8 +55,8 @@ export const useNotesStore: UseBoundStore<
   },
 
   mergeImport: (imported) => {
-    const existingIds = new Set(get().notesData.notes.map((n) => n.id));
-    const newNotes = imported.notes.filter((n) => !existingIds.has(n.id));
+    const existingIds = new Set(get().notesData.notes.map((note) => note.id));
+    const newNotes = imported.notes.filter((note) => !existingIds.has(note.id));
     const notesData: INotesData = {
       deviceId: imported.deviceId ?? get().notesData.deviceId,
       notes: [...get().notesData.notes, ...newNotes],
@@ -76,7 +76,7 @@ export const useNotesStore: UseBoundStore<
   deleteNote: (id) => {
     const notesData: INotesData = {
       ...get().notesData,
-      notes: get().notesData.notes.filter((n) => n.id !== id),
+      notes: get().notesData.notes.filter((note) => note.id !== id),
     };
     saveNotes(notesData);
     set({ notesData });
