@@ -15,6 +15,7 @@ export const ApiUrlInput: FC = () => {
   return (
     <Group
       align="flex-end"
+      wrap="nowrap"
       gap="8"
       w={{ base: '100%', sm: 'auto' }}
     >
@@ -26,7 +27,7 @@ export const ApiUrlInput: FC = () => {
         autoComplete="url"
         name="ha-host"
         size="xs"
-        style={{ flex: 1, minWidth: 120 }}
+        style={{ flex: 1, width: 300 }}
       />
 
       <Button
@@ -36,7 +37,7 @@ export const ApiUrlInput: FC = () => {
         disabled={!localHost.trim()}
         onClick={() => applyHost(localHost)}
       >
-        Применить
+        ✓
       </Button>
     </Group>
   );

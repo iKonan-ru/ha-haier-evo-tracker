@@ -1,5 +1,13 @@
 import { useState, type FC } from 'react';
-import { Box, Button, Drawer, Group, Paper, Title } from '@mantine/core';
+import {
+  ActionIcon,
+  Box,
+  Button,
+  Drawer,
+  Group,
+  Paper,
+  Title,
+} from '@mantine/core';
 import { ChangelogSidebar } from '@widgets/changelog-sidebar';
 import { CorsHint } from '@widgets/cors-hint';
 import { PollToolbar } from '@widgets/poll-toolbar';
@@ -32,7 +40,10 @@ export const TrackerHeader: FC = () => {
         >
           <Title order={4}>Haier Evo :: трекер атрибутов</Title>
 
-          <Group gap="xs">
+          <Group
+            gap="xs"
+            w={{ base: '100%', sm: 'auto' }}
+          >
             <Button
               hiddenFrom="sm"
               variant="default"
@@ -42,18 +53,20 @@ export const TrackerHeader: FC = () => {
               Изменения{changelog.length > 0 ? ` (${changelog.length})` : ''}
             </Button>
 
+            <ThemeToggle />
+
             {running && (
-              <Button
+              <ActionIcon
                 hiddenFrom="sm"
-                variant="subtle"
-                size="xs"
+                variant="default"
+                size="md"
+                ml="auto"
                 px={6}
                 onClick={() => setHeaderExpanded((v) => !v)}
               >
                 {headerExpanded ? '▴' : '▾'}
-              </Button>
+              </ActionIcon>
             )}
-            <ThemeToggle />
           </Group>
         </Group>
 
