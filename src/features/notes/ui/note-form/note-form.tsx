@@ -56,6 +56,7 @@ export const NoteForm: FC<INoteFormProps> = ({ attr }) => {
         >
           Сохранить
         </Button>
+
         <Button
           variant="default"
           size="xs"

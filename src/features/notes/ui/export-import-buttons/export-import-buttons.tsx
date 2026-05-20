@@ -23,7 +23,7 @@ export const ExportImportButtons: FC = () => {
   return (
     <Group
       gap="xs"
-      mt={18}
+      mt={8}
     >
       <Button
         variant="default"
@@ -32,6 +32,7 @@ export const ExportImportButtons: FC = () => {
       >
         Экспорт JSON
       </Button>
+
       <Button
         variant="default"
         size="xs"
@@ -39,6 +40,7 @@ export const ExportImportButtons: FC = () => {
       >
         Импорт JSON
       </Button>
+
       <input
         ref={fileInputRef}
         type="file"

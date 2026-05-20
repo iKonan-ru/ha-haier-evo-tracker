@@ -1,0 +1,11 @@
+.card {
+  transition: background-color 300ms ease;
+}
+
+.card:hover:not(.changed) {
+  background-color: color-mix(in srgb, var(--mantine-color-gray-5) 3%, transparent);
+}
+
+.changed {
+  background-color: color-mix(in srgb, var(--mantine-color-blue-9) 15%, transparent);
+}

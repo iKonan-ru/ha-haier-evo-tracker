@@ -44,8 +44,10 @@ export const NotesList: FC<INotesListProps> = ({ notes }) => {
               >
                 {new Date(note.createdAt).toLocaleString('ru-RU')}
               </Text>
+
               {': '}
               {note.text}
+
               {note.valueAtSave != null && (
                 <Text
                   component="span"
@@ -59,6 +61,7 @@ export const NotesList: FC<INotesListProps> = ({ notes }) => {
               )}
             </Text>
           </Stack>
+
           <CloseButton
             size="xs"
             onClick={() => deleteNote(note.id)}

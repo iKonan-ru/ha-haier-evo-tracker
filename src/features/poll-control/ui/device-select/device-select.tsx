@@ -30,7 +30,7 @@ export const DeviceSelect: FC = () => {
       onChange={handleChange}
       clearable
       size="xs"
-      w={220}
+      w={{ base: '100%', sm: 220 }}
     />
   );
 };

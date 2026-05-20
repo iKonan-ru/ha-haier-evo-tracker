@@ -30,12 +30,13 @@ export const FilterToolbar: FC<IFilterToolbarProps> = ({
         onChange={handleOnlyChanged}
         size="xs"
       />
+
       <TextInput
         placeholder="Поиск code"
         value={filters.searchCode}
         onChange={handleSearchCode}
         size="xs"
-        w={120}
+        style={{ flex: 1 }}
       />
     </Group>
   );

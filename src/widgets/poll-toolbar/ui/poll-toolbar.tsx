@@ -13,6 +13,7 @@ export const PollToolbar: FC = () => (
     gap="md"
     align="flex-end"
     wrap="wrap"
+    mb="xs"
   >
     <ApiUrlInput />
     <DeviceSelect />

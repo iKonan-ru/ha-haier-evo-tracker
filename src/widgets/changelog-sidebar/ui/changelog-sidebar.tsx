@@ -22,6 +22,7 @@ export const ChangelogSidebar: FC = () => {
           code {entry.code}
           {name}
         </Text>
+
         <Text
           size="xs"
           c="dimmed"
@@ -29,6 +30,7 @@ export const ChangelogSidebar: FC = () => {
           {entry.oldVal ?? '-'} → {entry.newVal ?? '-'}
           {entry.newLabel ? ` (${entry.newLabel})` : ''}
         </Text>
+
         <Text
           component="time"
           size="xs"

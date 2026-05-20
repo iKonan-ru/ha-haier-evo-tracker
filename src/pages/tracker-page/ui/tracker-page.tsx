@@ -1,39 +1,12 @@
 import { type FC } from 'react';
-import { Box, Group, Paper, Title } from '@mantine/core';
+import { Box, Paper } from '@mantine/core';
 import { AttributeList } from '@widgets/attribute-list';
 import { ChangelogSidebar } from '@widgets/changelog-sidebar';
-import { CorsHint } from '@widgets/cors-hint';
-import { PollToolbar } from '@widgets/poll-toolbar';
-import { StatusBar } from '@widgets/status-bar';
-import { ThemeToggle } from '@widgets/theme-toggle';
+import { TrackerHeader } from './tracker-header';
 
 export const TrackerPage: FC = () => (
   <Box style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-    <Paper
-      component="header"
-      withBorder
-      shadow="sm"
-      p="md"
-      m="md"
-      mb="0"
-    >
-      <Group
-        gap="md"
-        align="flex-start"
-        justify="space-between"
-      >
-        <Title
-          order={4}
-          mb="xs"
-        >
-          Haier Evo :: трекер атрибутов
-        </Title>
-        <ThemeToggle />
-      </Group>
-      <PollToolbar />
-      <StatusBar />
-      <CorsHint />
-    </Paper>
+    <TrackerHeader />
 
     <Box style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
       <Box
@@ -51,6 +24,7 @@ export const TrackerPage: FC = () => (
         p="md"
         m="md"
         w={300}
+        visibleFrom="sm"
         style={{ flexShrink: 0, overflowY: 'auto' }}
       >
         <ChangelogSidebar />

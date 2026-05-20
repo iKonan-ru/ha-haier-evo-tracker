@@ -12,7 +12,6 @@ export const StatusBar: FC = () => {
       <Text
         size="xs"
         c="red"
-        mt="xs"
       >
         {deviceFetchError}
       </Text>
@@ -23,7 +22,6 @@ export const StatusBar: FC = () => {
     <Text
       size="xs"
       c={isError ? 'red' : 'dimmed'}
-      mt="xs"
     >
       {statusText}
     </Text>

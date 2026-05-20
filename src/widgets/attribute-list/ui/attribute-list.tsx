@@ -1,15 +1,9 @@
 import { useState, type FC } from 'react';
 import { SimpleGrid, Text } from '@mantine/core';
 import { FilterToolbar, type IFilterState } from '@features/attribute-filters';
-import {
-  NoteForm,
-  NotesList,
-  NoteToggleButton,
-  useNotesStore,
-} from '@features/notes';
 import { useTrackerStore } from '@features/poll-control';
-import { AttributeRow } from '@entities/attribute';
 import { useAttributeList } from '../hooks';
+import { AttributeItem } from './attribute-item';
 
 const INITIAL_FILTERS: IFilterState = {
   onlyChanged: false,
@@ -19,12 +13,11 @@ const INITIAL_FILTERS: IFilterState = {
 
 export const AttributeList: FC = () => {
   const [filters, setFilters] = useState<IFilterState>(INITIAL_FILTERS);
-  const changedKeys = useTrackerStore((store) => store.changedKeys);
   const attributes = useTrackerStore((store) => store.attributes);
-  const notesData = useNotesStore((store) => store.notesData);
+  const changedKeys = useTrackerStore((store) => store.changedKeys);
   const { sortedAttrs } = useAttributeList({ ...filters, changedKeys });
 
-  if (!attributes.length) {
+  if (attributes.length === 0) {
     return (
       <Text
         c="dimmed"
@@ -43,7 +36,7 @@ export const AttributeList: FC = () => {
         filters={filters}
         onFilterChange={setFilters}
       />
-      {sortedAttrs.length === 0 ? (
+      {!sortedAttrs.length ? (
         <Text
           c="dimmed"
           fs="italic"
@@ -57,27 +50,13 @@ export const AttributeList: FC = () => {
           cols={{ base: 1, sm: 2, lg: 3 }}
           spacing="xs"
         >
-          {sortedAttrs.map((attr) => {
-            const isChanged = changedKeys.has(attr.codeKey);
-            const notes = notesData.notes.filter(
-              (note) => note.codeKey === attr.codeKey,
-            );
-
-            return (
-              <AttributeRow
-                key={attr.codeKey}
-                attr={attr}
-                isChanged={isChanged}
-                actions={<NoteToggleButton codeKey={attr.codeKey} />}
-                noteContent={
-                  <>
-                    <NotesList notes={notes} />
-                    <NoteForm attr={attr} />
-                  </>
-                }
-              />
-            );
-          })}
+          {sortedAttrs.map((attr) => (
+            <AttributeItem
+              key={attr.codeKey}
+              attr={attr}
+              isChanged={changedKeys.has(attr.codeKey)}
+            />
+          ))}
         </SimpleGrid>
       )}
     </>

@@ -2,6 +2,7 @@ import { type FC, type ReactNode } from 'react';
 import { Badge, Group, Paper, Stack, Text } from '@mantine/core';
 import type { IAttribute } from '../../types';
 import { formatRange, formatValue, UNKNOWN_ATTR_NAME } from '../../utils';
+import styles from './attribute-row.module.css';
 
 interface IAttributeRowProps {
   attr: IAttribute;
@@ -23,12 +24,7 @@ export const AttributeRow: FC<IAttributeRowProps> = ({
     <Paper
       withBorder
       p="sm"
-      style={{
-        backgroundColor: isChanged
-          ? 'color-mix(in srgb, var(--mantine-color-blue-9) 15%, transparent)'
-          : undefined,
-        transition: 'background-color 300ms ease',
-      }}
+      className={`${styles.card}${isChanged ? ` ${styles.changed}` : ''}`}
     >
       <Stack
         gap={4}
@@ -36,7 +32,7 @@ export const AttributeRow: FC<IAttributeRowProps> = ({
       >
         <Group
           gap="xs"
-          align="baseline"
+          align="center"
         >
           <Text
             fw={600}

@@ -16,6 +16,7 @@ export const ApiUrlInput: FC = () => {
     <Group
       align="flex-end"
       gap="8"
+      w={{ base: '100%', sm: 'auto' }}
     >
       <TextInput
         label="Хост Home Assistant"
@@ -25,8 +26,9 @@ export const ApiUrlInput: FC = () => {
         autoComplete="url"
         name="ha-host"
         size="xs"
-        w={260}
+        style={{ flex: 1, minWidth: 120 }}
       />
+
       <Button
         size="xs"
         variant="default"
