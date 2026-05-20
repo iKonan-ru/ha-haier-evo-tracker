@@ -1,4 +1,5 @@
 import { type FC } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 import {
   NoteForm,
   NotesList,
@@ -13,8 +14,10 @@ interface IAttributeItemProps {
 }
 
 export const AttributeItem: FC<IAttributeItemProps> = ({ attr, isChanged }) => {
-  const notes = useNotesStore((store) =>
-    store.notesData.notes.filter((note) => note.codeKey === attr.codeKey),
+  const notes = useNotesStore(
+    useShallow((store) =>
+      store.notesData.notes.filter((note) => note.codeKey === attr.codeKey),
+    ),
   );
 
   return (
